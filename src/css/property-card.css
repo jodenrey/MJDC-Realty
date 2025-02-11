@@ -1,0 +1,49 @@
+.property-card-wrap,
+.properties-card {
+  width: 100%;
+}
+
+.property-item-link {
+  &:hover {
+    .property-card-top > img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.property-card-top {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-card-top > img {
+  width: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: all 0.5s ease-in-out;
+}
+
+.property-card-top > .status-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-weight: 500;
+  padding: 3px 12px;
+  text-align: center;
+  border-radius: 50px;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  .properties-list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    grid-auto-columns: 1fr;
+  }
+}

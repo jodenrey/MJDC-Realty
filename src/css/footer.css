@@ -1,0 +1,81 @@
+.footer-contact-us-wrappper {
+  background: linear-gradient(#000000bb, #00000070),
+    url("https://ucarecdn.com/d1dce34e-36e2-4d03-9b9f-0a49be31e2e6/-/preview/1920x1080/");
+  background-position: 0 0, center;
+  background-size: auto, cover;
+}
+
+.footer-nav-link {
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-social-item {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+#newsletter {
+  padding: 15px;
+  height: 55px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+
+  &::placeholder {
+    font-size: 0.9em;
+    font-weight: 4 00;
+    color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.newsletter-email-wrap {
+  max-width: 500px;
+  position: relative;
+}
+
+.newsletter-email-wrap > button {
+  position: absolute;
+  background-color: black;
+  height: 40px;
+  width: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  border-radius: 12px;
+  color: white;
+  border: 1px solid black;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: transparent;
+    color: black;
+  }
+}
+
+@media (min-width: 480px) {
+  .footer-top {
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    margin-top: 6rem;
+  }
+}

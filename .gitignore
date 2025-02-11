@@ -1,0 +1,54 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+npm-error.log*
+
+# Operating system files
+.DS_Store                # macOS
+Thumbs.db                # Windows
+desktop.ini              # Windows
+
+# Build and temp directories
+dist/                
+public/build/
+.parcel-cache/  
+
+# CSS preprocessor output
+*.sass-cache/
+*.cache/
+*.tmp/
+
+# Tailwind CSS
+tailwind.config.js
+postcss.config.js
+
+# IDE specific settings (VS Code, JetBrains)
+.vscode/
+.idea/
+
+# Environment files (for API keys, Firebase config, etc.)
+.env
+.env.local
+.env.development
+.env.production
+
+# Compiled CSS
+*.css.map
+
+# Ignore build and other temporary files
+*.tmp
+*.swp
+*.swo
+
+# Git-specific
+.git/
+
+# Optional: Documentation and metadata
+*.pdf
+*.docx
+*.md~

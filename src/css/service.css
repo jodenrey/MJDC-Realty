@@ -1,0 +1,73 @@
+.service-wrap {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.service-text {
+  width: 100%;
+  line-height: 170%;
+}
+
+.service-icon {
+  width: 60px;
+  max-width: 60px;
+  height: 60px;
+}
+
+/* Service view Styles */
+
+.service-overview-container {
+  h2 {
+    margin-block: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: "Lexend", serif;
+  }
+
+  p:nth-of-type(1) {
+    max-width: 1100px;
+    color: rgb(12 10 9);
+    line-height: 1.75rem;
+  }
+
+  p:nth-of-type(2) {
+    max-width: 1300px;
+    color: rgb(12 10 9);
+    line-height: 1.75rem;
+    margin-top: 1.2rem;
+  }
+
+  h3:nth-of-type(1) {
+    font-family: "Lexend", serif;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  ul {
+    margin-block: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: rgb(12 10 9);
+  }
+
+  h3:nth-of-type(2) {
+    font-family: "Lexend", serif;
+    margin-top: 2.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 480px) {
+  .service-text {
+    max-width: 75%;
+  }
+  .service-wrap-header {
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-text {
+    max-width: 800px;
+  }
+}

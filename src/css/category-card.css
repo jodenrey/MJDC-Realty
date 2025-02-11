@@ -1,0 +1,48 @@
+/* category-wrapper */
+.category {
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    .explore-now-btn > .fa-arrow-right-long {
+      left: 8px;
+    }
+  }
+}
+
+.explore-now-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.explore-now-btn > .fa-arrow-right-long {
+  position: relative;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .category-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 25px;
+    align-items: stretch;
+  }
+}
+
+/* Category Page Style */
+
+.category-header {
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  a {
+    img {
+      transition: all 0.5s ease-in-out;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

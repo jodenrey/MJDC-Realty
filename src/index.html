@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore the best listings with MJDC Realty, the modern solution for buying, renting, and selling homes. Discover detailed property insights, professional agents, and find your dream home today!"
+    />
+    <meta
+      name="keywords"
+      content="real estate, homes for sale, property listings, apartments for rent, buy a home, real estate agents, houses for sale, modern real estate, MJDC Realty"
+    />
+    <meta name="author" content="MJDC Team" />
+    <!-- Open Graph Meta Tags (For Social Media Sharing) -->
+    <meta
+      property="og:title"
+      content="MJDC - Making Joyful Dreams Connected"
+    />
+    <meta
+      property="og:description"
+      content="Find your dream home with MJDC Realty. Browse our curated listings, connect with trusted agents, and explore properties tailored to your needs."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="MJDC" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- <meta property="og:type" content="website" /> -->
+    <!-- <meta property="og:url" content="https://htmlcheatsheet.com/" />
+    -->
+    <!-- <meta property="og:image" content="https://htmlcheatsheet.com/demo.jpg"
+    />
+    -->
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <!-- Google Font's -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Fontawesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/custom.css" />
+    <title>MJDC: Making Joyful Dreams Connected</title>
+  </head>
+
+  <body class="bg-orange-50">
+    <div class="bg-overlay z-10"></div>
+    <!-- Header -->
+    <header class="site-header absolute w-full">
+      <nav
+        class="main-nav mx-auto max-w-screen-2xl flex p-3 justify-between items-center 2xl:pl-0"
+        aria-label="global"
+      >
+        <div class="site-logo p-1">
+          <a
+            href="./index.html"
+            class="font-brand text-2xl text-slate-100 font-medium md:text-3xl"
+          >
+            MJDC Realty
+          </a>
+        </div>
+        <div class="nav-toggle-btn-wrap flex items-center gap-2">
+          <a
+            href="./pages/contact-us.html"
+            class="contact-us-btn text-base border-slate-50/[.07] rounded-lg bg-slate-50/[.07] py-1 border px-3 uppercase tracking-wide font-medium text-slate-300 md:py-2 md:px-5 hover:bg-zinc-950 transition duration-300 ease-in-out"
+          >
+            Contact Us
+          </a>
+          <button class="open-nav-btn text-slate-100 p-1 md:p-2">
+            <svg
+              class="size-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="navbar fixed w-full max-w-lg h-full bg-orange-50 z-10 p-5 py-5 flex flex-col justify-between font-brand"
+        >
+          <div class="close-wrapper self-end">
+            <button
+              class="close-nav-btn uppercase text-xs tracking-widest font-light"
+            >
+              Close
+            </button>
+          </div>
+          <ul
+            class="nav-menu flex flex-col gap-5 tracking-widest text-slate-950"
+          >
+            <li class="nav-item uppercase">
+              <a
+                href="./index.html"
+                class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800 active-link"
+                aria-current="page"
+              >
+                Home
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+            <li class="nav-item uppercase">
+              <a
+                href="./pages/about-us.html"
+                class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800"
+              >
+                About us
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+            <li class="nav-item uppercase">
+              <a
+                href="./pages/properties.html"
+                class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800"
+              >
+                properties
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+            <li class="nav-item uppercase">
+              <a
+                href="./pages/properties-categories.html"
+                class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800"
+              >
+                properties Categories
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+            <li class="nav-item uppercase">
+              <a
+                href="./pages/services.html"
+                class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800"
+              >
+                Services
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+            <li class="nav-item uppercase">
+              <a href="./pages/blog.html" class="nav-link pb-5 block">
+                Blogs
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-social-wrapper md:flex justify-between">
+            <ul
+              class="social-media p-2 flex items-center justify-center gap-3 text-sm"
+            >
+              <li class="social-item px-1 list-none">
+                <a href="https://twitter.com/" class="social-links">
+                  Twitter
+                </a>
+              </li>
+              <li class="social-item px-1">
+                <a href="https://www.facebook.com/" class="social-links">
+                  Facebook
+                </a>
+              </li>
+              <li class="social-item px-1">
+                <a href="https://www.instagram.com/" class="social-links">
+                  Instagram
+                </a>
+              </li>
+            </ul>
+            <p class="copyright-text text-center p-2 text-sm">
+              &copy; 2024 MJDC Realty
+            </p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hidden-elements hidden">
+        <a href="./pages/blog-view.html"></a>
+        <a href="./pages/agent-profile.html"></a>
+        <a href="./pages/service-view.html"></a>
+        <a href="./pages/property-view.html"></a>
+        <a href="./pages/page-not-found.html"></a>
+      </div>
+    </header>
+    <main>
+      <section class="hero-section flex items-end pb-20">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="./assets/img/video.mp4" type="video/mp4">
+        </video>
+        <div class="container h-full max-w-screen-2xl mx-auto text-center">
+            <h1 class="hero-title mx-auto font-heading text-4xl leading-tight p-3 uppercase font-medium text-white md:text-6xl md:w-3/5">
+                Discover Your Dream Home with MJDC Realty
+            </h1>
+            <p class="section-tagline p-3 text-white font-body uppercase text-sm">
+                Making Joyful Dreams Connected
+            </p>
+        </div>
+    </section>
+      <section class="about-overview p-4 py-14 md:py-24 lg:py-32">
+        <div
+          class="container about-overview-container max-w-screen-2xl mx-auto"
+        >
+          <div class="about-overview-wrapper flex flex-col gap-5">
+            <div class="about-overview-content-wrap">
+              <div class="section-title-wrap flex flex-col gap-3 py-2">
+                <img
+                  src="assets/img/mjdc.png"
+                  alt="home-vector"
+                  class="about-icon self-center"
+                />
+                <h2
+                  class="section-title font-heading uppercase text-sm tracking-wide text-stone-800"
+                >
+                  About MDJC Realty
+                </h2>
+              </div>
+              <div class="overview-description-wrap py-10">
+                <p
+                  class="overview-description text-stone-800 font-body leading-7"
+                >
+                  Where industry expertise meets modern technology to make your
+                  real estate journey effortless. From buying and selling to
+                  property management, we’re here to support every step of the
+                  way with innovation and care.
+                </p>
+                <a
+                  href="./pages/properties.html"
+                  class="explore-properties font-body uppercase my-6 block text-stone-950 border text-center p-2 text-sm font-normal border-black rounded-md tracking-wide hover:bg-zinc-950 hover:text-white transition duration-300 ease-in-out"
+                >
+                  Explore properties
+                </a>
+              </div>
+              <div class="content-img-wrap">
+                <img
+                  src="assets/img/interior1.jpg"
+                  alt="A cozy living room featuring green walls and a brown couch"
+                />
+              </div>
+            </div>
+            <div class="overview-img-wrap">
+              <img
+                src="assets/img/interior.jpg"
+                alt="A dining room featuring green chairs surrounding a wooden table, creating a vibrant and inviting atmosphere."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="feature-project-section p-4 py-12 md:py-10 lg:pb-20">
+        <div
+          class="container featured-projects-container mx-auto max-w-screen-2xl"
+        >
+          <p
+            class="uppercase font-body font-light tracking-wide text-stone-600"
+          >
+            Stylish Comfort
+          </p>
+          <h2
+            class="section-title font-heading text-2xl text-stone-950 normal-case lg:text-4xl"
+          >
+            Featured Properties
+          </h2>
+          <div
+            class="featured-projects my-10 flex flex-col gap-8 md:flex-row"
+          ></div>
+        </div>
+      </section>
+      <section
+        class="properties-categories-section py-10 pb-20 p-4 font-body md:py-20 md:pb-40 lg:pb-48"
+      >
+        <div
+          class="container categories-container mx-auto max-w-screen-2xl flex flex-col gap-10 min-[800px]:flex-row"
+        >
+          <div class="categories-content-container min-[800px]:w-2/4">
+            <h2 class="section-title font-heading font-light uppercase text-sm">
+              Property Categories
+            </h2>
+            <div class="content-container my-10 flex flex-col gap-5">
+              <h3 class="font-heading tracking-wide text-xl md:text-2xl">
+                Start Your Search for the Perfect Property Today
+              </h3>
+              <p class="my-1 text-stone-800">
+                Explore a diverse selection of property categories tailored to
+                meet your unique needs. With our extensive listings and expert
+                support, you’re sure to find a place that feels like home.
+              </p>
+            </div>
+          </div>
+          <div class="category-wrapper flex flex-col gap-5 min-[800px]:w-full">
+            <div class="category-list-item h-full">
+              <a
+                href="#"
+                class="category flex flex-col gap-5 border border-gray-950/20 rounded-lg p-5 h-full justify-between"
+              >
+                <div class="category-img-wrap flex gap-2">
+                  <img
+                    src="https://ucarecdn.com/55f49f03-c4dc-4b10-ad44-8bda4a8bdaa4/-/preview/640x422/"
+                    alt="A brightly illuminated House exterior at night, showcasing its inviting atmosphere and vibrant ambiance."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/6bf29110-4aa5-4a6d-a576-11bb32a9c655/-/preview/640x360/"
+                    alt="A grand mansion silhouetted against a vibrant sunset, showcasing a blend of elegance and natural beauty."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/8275faa5-d600-4457-93a6-882ccc8184c8/-/preview/640x426/"
+                    alt="A large barn set in a wide yard, accompanied by a substantial house, reflecting a picturesque countryside scene."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                </div>
+                <h4 class="font-heading font-medium text-xl text-stone-950">
+                  Alegria Units
+                </h4>
+                <p class="text-stone-800 font-body">
+                  Luxury Homes and estates with premium amenities for refined
+                  living
+                </p>
+                <button
+                  class="explore-now-btn flex gap-4 items-center text-stone-950 text-sm"
+                >
+                  <i class="fa-solid fa-arrow-right-long"> </i>
+                  <span class="uppercase font-heading"> Explore Now </span>
+                </button>
+              </a>
+            </div>
+            <div class="category-list-item">
+              <a
+                href="#"
+                class="category flex flex-col gap-5 border border-gray-950/20 rounded-lg p-5 h-full justify-between"
+              >
+                <div class="category-img-wrap flex gap-2">
+                  <img
+                    src="https://ucarecdn.com/d52c8def-8d55-4a0b-b102-afbcd5fea135/-/preview/640x454/"
+                    alt="A panoramic view of a bustling city featuring a large cluster of diverse buildings."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/b5b58807-242f-47c5-9d5e-7bb1f13a9306/-/preview/640x427/"
+                    alt="A row of houses with parked cars lining the street, showcasing a suburban neighborhood scene."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/27936208-0f3d-46b3-ac9c-d027349bbe12/-/preview/640x480/"
+                    alt="Aerial view of a residential neighborhood featuring houses surrounded by lush green trees."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                </div>
+                <h4 class="font-heading font-medium text-xl text-stone-950">
+                  Idesia Units
+                </h4>
+                <p class="text-stone-800 font-body">
+                  Exclusive top-floor units with stunning views and high-end
+                  amenities.
+                </p>
+                <button
+                  class="explore-now-btn flex gap-4 items-center text-stone-950 text-sm"
+                >
+                  <i class="fa-solid fa-arrow-right-long"> </i>
+                  <span class="uppercase font-heading"> Explore Now </span>
+                </button>
+              </a>
+            </div>
+            <div class="category-list-item">
+              <a
+                href="#"
+                class="category flex flex-col gap-5 border border-gray-950/20 rounded-lg p-5 h-full justify-between"
+              >
+                <div class="category-img-wrap flex gap-2">
+                  <img
+                    src="https://ucarecdn.com/513373f5-ff4c-4719-8224-2748babc8448/-/preview/640x427/"
+                    alt="A house featuring a wooden roof and a paved driveway, surrounded by greenery."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/08e1cbf4-f4d2-494f-878a-ae5c32268a4e/-/preview/640x458/"
+                    alt="An old car parked in front of a charming house, showcasing vintage design against a residential backdrop."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/c82d7d2c-073b-4f25-92cc-8b9eb49a5fac/-/preview/640x480/"
+                    alt="A row of charming houses bordered by a classic white picket fence, showcasing a picturesque neighborhood scene."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                </div>
+                <h4 class="font-heading font-medium text-xl text-stone-950">
+                  Amaresa Marilao Units
+                </h4>
+                <p class="text-stone-800 font-body">
+                  Eco-friendly homes with innovative green technology for
+                  sustainable living.
+                </p>
+                <button
+                  class="explore-now-btn flex gap-4 items-center text-stone-950 text-sm"
+                >
+                  <i class="fa-solid fa-arrow-right-long"> </i>
+                  <span class="uppercase font-heading"> Explore Now </span>
+                </button>
+              </a>
+            </div>
+            <div class="category-list-item">
+              <a
+                href="#"
+                class="category flex flex-col gap-5 border border-gray-950/20 rounded-lg p-5 h-full justify-between"
+              >
+                <div class="category-img-wrap flex gap-2">
+                  <img
+                    src="https://ucarecdn.com/eed5344b-f872-4bad-a26a-68b403c0fd73/-/preview/640x480/"
+                    alt="Aerial view showcasing the industrial area of Zurich, Switzerland, highlighting buildings and infrastructure."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/1c40d1c4-4416-41de-b32a-798129f96ecb/-/preview/640x480/"
+                    alt="Aerial view of a bustling cityscape featuring various buildings and cars on the streets below."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                  <img
+                    src="https://ucarecdn.com/47a76a09-e5cb-4e9f-a5a9-d7ab90c4307d/-/preview/640x426/"
+                    alt="Black and white image showcasing towering city buildings against a clear sky, emphasizing urban architecture and scale."
+                    class="w-14 h-14 rounded-full object-cover"
+                  />
+                </div>
+                <h4 class="font-heading font-medium text-xl text-stone-950">
+                  Sentrina Alaminos Units
+                </h4>
+                <p class="text-stone-800 font-body">
+                  Commercial properties designed to offer comfort & convenience
+                  to guests.
+                </p>
+                <button
+                  class="explore-now-btn flex gap-4 items-center text-stone-950 text-sm"
+                >
+                  <i class="fa-solid fa-arrow-right-long"> </i>
+                  <span class="uppercase font-heading"> Explore Now </span>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="why-choose-us-section font-body border border-x-0">
+        <div
+          class="why-choose-us-container container mx-auto max-w-screen-2xl flex flex-col md:flex-row"
+        >
+          <div
+            class="choose-us-content flex flex-col gap-8 border border-x-0 border-t-0 py-10 px-4 md:border-r md:border-b-0 justify-between"
+          >
+            <h2
+              class="section-title font-heading text-stone-950 text-2xl lg:text-3xl"
+            >
+              Why Choose Us
+            </h2>
+            <div class="c-wrap">
+              <p class="text-stone-800 my-3 md:w-5/6">
+                Our experienced team understands the complexities of the real
+                estate market, offering you reliable advice and strategic
+                insights to ensure a smooth and informed property journey.
+              </p>
+              <a
+                href="pages/contact-us.html"
+                class="text-stone-950 flex items-center gap-3 uppercase text-sm mt-5 w-max"
+              >
+                <i class="fa-solid fa-arrow-right-long"> </i>
+                Contact Us
+              </a>
+            </div>
+          </div>
+          <div class="choose-us-image p-4 max-w-3xl md:p-5 mx-auto md:h-full md:self-center">
+            <iframe 
+                src="https://www.youtube.com/embed/l4UT6AsFmIQ"
+                width="100%" 
+                height="400" 
+                style="border:none;overflow:hidden" 
+                scrolling="no" 
+                frameborder="0" 
+                allowfullscreen="true"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+        </div>
+      </section>
+      <section
+        class="latest-properties-section p-4 py-16 font-body md:py-28 lg:py-32"
+      >
+        <div
+          class="container latest-properties-container mx-auto max-w-screen-2xl"
+        >
+          <p class="uppercase text-sm tracking-wide text-stone-600">
+            New Arrivals
+          </p>
+          <h2
+            class="section-title font-heading text-stone-950 tracking-wide font-normal text-2xl lg:text-4xl"
+          >
+            Latest Properties
+          </h2>
+          <div
+            class="properties-list flex flex-col my-10 gap-8 md:grid md:grid-rows-3 md:grid-cols-2 min-[830px]:grid-cols-3 min-[830px]:grid-rows-2"
+            data-property="latest"
+          ></div>
+        </div>
+      </section>
+      <section class="testimonial-section font-body p-4 overflow-hidden">
+        <div
+          class="testimonial-container container mx-auto max-w-screen-2xl relative"
+        >
+          <p class="tracking-wide text-stone-600 uppercase text-sm">
+            Testimonials
+          </p>
+          <h2
+            class="section-title font-heading font-light text-stone-950 font-normal text-2xl lg:text-4xl"
+          >
+            Customer Reviews
+          </h2>
+          <div class="carousel-contorl-wrap">
+            <button class="carousel-prev-btn" role="button" data-slide="prev">
+              <i class="fa-solid fa-arrow-left"> </i>
+            </button>
+            <button class="carousel-next-btn" role="button" data-slide="next">
+              <i class="fa-solid fa-arrow-right"> </i>
+            </button>
+          </div>
+          <div class="testimonial-carousel-container my-8">
+            <div class="testimonial-slider-wrapper flex py-5"></div>
+          </div>
+        </div>
+      </section>
+      <section class="blog-section p-4 font-body py-10 lg:py-20">
+        <div
+          class="blog-container container mx-auto max-w-screen-2xl flex flex-col"
+        >
+          <div
+            class="blog-content-wrapper flex flex-col gap-5 md:flex-row justify-between"
+          >
+            <div>
+              <p class="uppercase text-stone-600 tracking-wide text-sm">
+                Our Blogs
+              </p>
+              <h2
+                class="font-heading text-start text-stone-950 font-normal tracking-wide text-2xl lg:text-4xl"
+              >
+                News & Article
+              </h2>
+            </div>
+            <a
+              href="./pages/blog.html"
+              class="view-all-btn uppercase text-sm flex gap-3 items-center"
+            >
+              <i class="fa-solid fa-arrow-right-long"> </i>
+              View all
+            </a>
+          </div>
+          <div
+            class="blog-card-container flex flex-col my-10 gap-5 md:flex-row justify-center md:my-5"
+          ></div>
+        </div>
+      </section>
+    </main>
+    <footer class="foooter-section pt-12 font-body md:pt-20">
+      <div
+        class="footer-contact-us-wrappper p-5 py-20 flex flex-col items-center gap-4 md:py-32"
+      >
+        <h2
+          class="font-heading text-3xl text-center text-white md:text-4xl lg:text-5xl max-w-48 md:max-w-6xl"
+        >
+          Contact us for advice & support
+        </h2>
+        <a
+          class="collaborate-btn text-sm border-stone-50/[0.5] rounded-lg bg-stone-500/[0.7] py-2 border px-4 uppercase tracking-wide font-medium text-slate-300 md:py-2 md:px-5 hover:bg-zinc-950 hover:text-white transition duration-300 ease-in-out hover:border-black"
+          href="./pages/contact-us.html"
+        >
+          Collaborate Now
+        </a>
+      </div>
+      <div
+        class="container footer-container mx-auto max-w-screen-2xl py-12 p-4 pt-16"
+      >
+        <div class="footer-top flex flex-col items-center gap-5">
+          <div class="footer-nav-container">
+            <ul
+              class="footer-nav-list flex flex-wrap uppercase text-stone-600 gap-x-3 gap-y-3 justify-center"
+            >
+              <li class="footer-nav-item">
+                <a
+                  href="./pages/about-us.html"
+                  class="footer-nav-link hover:underline"
+                >
+                  About Us
+                </a>
+              </li>
+              <li class="footer-nav-item">
+                <a
+                  href="./pages/properties.html"
+                  class="footer-nav-link hover:underline"
+                >
+                  Properties
+                </a>
+              </li>
+              <li class="footer-nav-item">
+                <a
+                  href="./pages/our-agents.html"
+                  class="footer-nav-link hover:underline"
+                >
+                  Our Agents
+                </a>
+              </li>
+              <li class="footer-nav-item">
+                <a
+                  href="./pages/services.html"
+                  class="footer-nav-link hover:underline"
+                >
+                  Services
+                </a>
+              </li>
+              <li class="footer-nav-item">
+                <a
+                  href="./pages/blog.html"
+                  class="footer-nav-link hover:underline"
+                >
+                  Blogs
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-social-container flex gap-2">
+            <div class="footer-social-item text-sm">
+              <a href="https://www.instagram.com/">
+                <i class="fa-brands fa-instagram"> </i>
+              </a>
+            </div>
+            <div class="footer-social-item text-sm">
+              <a href="https://facebook.com/">
+                <i class="fa-brands fa-facebook-f"> </i>
+              </a>
+            </div>
+            <div class="footer-social-item text-sm">
+              <a href="https://twitter.com/">
+                <i class="fa-brands fa-x-twitter"> </i>
+              </a>
+            </div>
+            <div class="footer-social-item text-sm">
+              <a href="https://www.youtube.com/">
+                <i class="fa-brands fa-youtube"> </i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom mt-16 flex flex-col gap-5">
+          <div class="footer-newsletter-container">
+            <form action="">
+              <label
+                for="newsletter"
+                class="uppercase tracking-wide font-medium"
+              >
+                Newsletter
+              </label>
+              <div class="newsletter-email-wrap my-3">
+                <input
+                  type="email"
+                  name="newsletter"
+                  id="newsletter"
+                  placeholder="Signup for Updates"
+                />
+                <button type="submit">
+                  <i class="fa-solid fa-arrow-right"> </i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="footer-right-container">
+            <p class="text-sm text-stone-600 text-center">&copy; 2024 MJDC Realty</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script defer src="js/main.js" type="module"></script>
+  </body>
+</html>

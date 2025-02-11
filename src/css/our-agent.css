@@ -1,0 +1,57 @@
+.agent-header {
+  border-radius: 15px 15px 0 0;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.agent-header > img {
+  border-radius: 15px 15px 0 0;
+  transition: all 0.4s ease-in-out;
+  transform: scale(1.08);
+}
+
+.agent-details {
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 0 0 15px 15px;
+}
+
+.agent-profile-link {
+  &:hover {
+    .agent-image {
+      transform: scale(1);
+    }
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .agent-profile-link {
+    flex-direction: row;
+  }
+  .agent-header {
+    border-radius: 15px 0px 0 15px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .agent-header > img {
+    object-fit: cover;
+    border-radius: 15px 0px 0 15px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .agent-details {
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 0 15px 15px 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .agent-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-auto-columns: 1fr;
+  }
+}
