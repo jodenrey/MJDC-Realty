@@ -5,6 +5,8 @@ export class HeaderManager {
   constructor() {
     this.navToggleHandler();
     this._handleNavLinkClick();
+    this._handleHeaderScroll();
+    this._initHeaderPosition();
   }
 
   navToggleHandler() {
@@ -25,6 +27,8 @@ export class HeaderManager {
     if (open) {
       navbar.classList.add("expand-nav");
       overlay.classList.add("active-overlay");
+      // Hide scrollbar when navbar is opened
+      document.body.style.overflow = "hidden";
     }
 
     if (close) {
@@ -32,6 +36,8 @@ export class HeaderManager {
         overlay.classList.remove("active-overlay");
       }, 450);
       navbar.classList.remove("expand-nav");
+      // Show scrollbar again when navbar is closed
+      document.body.style.overflow = "";
     }
 
     if (!open || !close) {
@@ -59,6 +65,44 @@ export class HeaderManager {
         link.removeAttribute("aria-current");
       }
     });
+  }
+
+  _initHeaderPosition() {
+    // Check if we're on the home page - typically index.html has a hero video section
+    const isHomePage = window.location.pathname === '/' || 
+                      window.location.pathname.endsWith('index.html') ||
+                      document.querySelector('.hero-video');
+
+    if (isHomePage && this.#parentElement) {
+      // Instead of adding absolute class, add home-header class
+      this.#parentElement.classList.add('home-header');
+      // Initial scroll position check
+      this._handleScrollPosition();
+    }
+  }
+
+  _handleHeaderScroll() {
+    if (!this.#parentElement) return;
+
+    window.addEventListener('scroll', () => {
+      this._handleScrollPosition();
+    });
+  }
+
+  _handleScrollPosition() {
+    const isHomePage = window.location.pathname === '/' || 
+                        window.location.pathname.endsWith('index.html') ||
+                        document.querySelector('.hero-video');
+    
+    if (isHomePage && this.#parentElement) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 50) {
+        this.#parentElement.classList.add('scrolled');
+      } else {
+        this.#parentElement.classList.remove('scrolled');
+      }
+    }
   }
 
   // _removeActiveNavLinks() {

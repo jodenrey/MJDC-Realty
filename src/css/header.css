@@ -56,5 +56,48 @@
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
   z-index: 10;
+  background-color: rgba(255, 247, 237, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+/* For pages with absolute positioning on the header (like home page) */
+.site-header.absolute {
+  position: absolute;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* Home page header styling */
+.home-header {
+  position: absolute;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.home-header .site-logo a,
+.home-header .contact-us-btn,
+.home-header .open-nav-btn {
+  color: rgb(241, 245, 249); /* text-slate-100 */
+}
+
+/* Add this class with JS to change the header style after scrolling */
+.site-header.scrolled {
+  position: fixed;
+  background-color: rgba(255, 247, 237, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.site-header.scrolled .site-logo a {
+  color: rgb(15, 23, 42); /* text-slate-950 */
+}
+
+.site-header.scrolled .contact-us-btn,
+.site-header.scrolled .open-nav-btn {
+  color: rgb(15, 23, 42); /* text-slate-950 */
+  border-color: rgb(15, 23, 42);
+  background-color: transparent;
 }
