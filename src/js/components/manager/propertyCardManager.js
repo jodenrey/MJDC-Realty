@@ -4,20 +4,20 @@ import { propertyCardMarkup } from "../../utils/markupGenerator";
 export default class PropertyCard {
   constructor() {}
 
-  async _fetchEntries(skipNum, limitNum, orderby) {
+  async _fetchEntries(skipNum, limitNum, orderby = '-sys.createdAt', filters = {}) {
     const entries = await client.getEntries({
       skip: skipNum,
       limit: limitNum,
       content_type: "property",
       order: orderby,
+      ...filters
     });
 
     if (!entries) {
       return;
     }
 
-    const propertyData = entries;
-    return propertyData;
+    return entries;
   }
 
   _renderProperties(data) {

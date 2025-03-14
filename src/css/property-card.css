@@ -1,9 +1,15 @@
 .property-card-wrap,
 .properties-card {
   width: 100%;
+  /* Make all property cards the same width */
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .property-item-link {
+  display: block;
+  height: 100%;
+
   &:hover {
     .property-card-top > img {
       transform: scale(1.05);
@@ -13,17 +19,24 @@
 
 .property-card-top {
   width: 100%;
-  max-width: 800px;
   border-radius: 15px;
   position: relative;
   overflow: hidden;
+  /* Fixed aspect ratio */
+  height: 0;
+  padding-bottom: 75%; /* 4:3 aspect ratio */
 }
 
 .property-card-top > img {
   width: 100%;
+  height: 100%;
   border-radius: 15px;
   object-fit: cover;
+  object-position: center;
   transition: all 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .property-card-top > .status-tag {
@@ -42,8 +55,7 @@
 @media screen and (min-width: 768px) {
   .properties-list {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto;
-    grid-auto-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
   }
 }
