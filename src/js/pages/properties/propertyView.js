@@ -145,10 +145,10 @@ class PropertyView {
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Area</p>
+                    <p class="font-medium text-stone-950">Lot Area</p>
                     <p class="property-area text-stone-600">${
                       property.area
-                    } sq ft</p>
+                    } sqm</p>
                   </div>
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
