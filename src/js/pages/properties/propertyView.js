@@ -137,7 +137,7 @@ class PropertyView {
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Property</p>
+                    <p class="font-medium text-stone-950">Type</p>
                     <p class="property-type text-stone-600">
                       ${property.propertyType}
                     </p>
@@ -184,7 +184,7 @@ class PropertyView {
                     <p class="font-medium text-stone-950">Car Garage</p>
                     <p class="property-area text-stone-600">${
                       property.garage
-                    } sqm</p>
+                    }</p>
                   </div>
                 </div>
               </div>
