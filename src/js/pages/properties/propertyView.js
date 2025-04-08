@@ -120,18 +120,18 @@ class PropertyView {
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Agent Name</p>
+                    <p class="font-medium text-stone-950">Subdivision</p>
                     <p class="agent-name text-stone-600">${
-                      property?.agent.fields.name
+                      property.subdivision
                     }</p>
                   </div>
 
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Built</p>
+                    <p class="font-medium text-stone-950">Location</p>
                     <p class="property-built text-stone-600">${
-                      property.builtIn
+                      property.location
                     }</p>
                   </div>
                   <div
@@ -150,6 +150,14 @@ class PropertyView {
                       property.area
                     } sqm</p>
                   </div>
+                   <div
+                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                  >
+                    <p class="font-medium text-stone-950">Floor Area</p>
+                    <p class="property-area text-stone-600">${
+                      property.floorarea
+                    } sqm</p>
+                  </div>
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
@@ -163,12 +171,20 @@ class PropertyView {
                   <div
                     class="content flex justify-between border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Bathrooms</p>
+                    <p class="font-medium text-stone-950">Toilet & Bath</p>
                     <p class="bathroom-info text-stone-600">
                       <span class="number-of-baths">${
                         property?.bathrooms ?? "No"
                       }</span> Bathrooms
                     </p>
+                  </div>
+                   <div
+                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                  >
+                    <p class="font-medium text-stone-950">Car Garage</p>
+                    <p class="property-area text-stone-600">${
+                      property.garage
+                    } sqm</p>
                   </div>
                 </div>
               </div>
