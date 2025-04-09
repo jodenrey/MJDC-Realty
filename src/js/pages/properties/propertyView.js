@@ -113,7 +113,7 @@ class PropertyView {
 
               <div class="property-info-bottom">
                 <h2 class="font-medium text-stone-950 text-lg font-heading">
-                  Information
+                  Details
                 </h2>
 
                 <div class="property-info-content my-5">
