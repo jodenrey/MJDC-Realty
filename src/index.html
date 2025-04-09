@@ -212,8 +212,8 @@
     </header>
     <main>
       <section class="hero-section flex items-end pb-20">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="./assets/img/video.mp4" type="video/mp4">
+        <video class="hero-video" autoplay muted loop playsinline onloadedmetadata="this.currentTime=8">
+          <source src="./assets/img/video.mp4" type="video/mp4">
         </video>
         <div class="container h-full max-w-screen-2xl mx-auto text-center">
             <h1 class="hero-title mx-auto font-heading text-4xl leading-tight p-3 uppercase font-medium text-white md:text-6xl md:w-3/5">
