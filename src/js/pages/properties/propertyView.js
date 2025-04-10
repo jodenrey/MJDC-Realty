@@ -121,10 +121,10 @@ class PropertyView {
 
             <div class="property-info-data flex flex-col gap-10">
               <div
-                class="property-info-top flex justify-between border border-x-0 py-4 font-medium"
+                class="property-info-top flex items-center gap-2 border border-x-0 py-4 font-medium"
               >
-                <p class="text-stone-600">Price</p>
-                <p class="price">${property.price}</p>
+                <p class="text-stone-950">Price:</p>
+                <p class="price text-stone-600">${property.price}</p>
               </div>
 
               <div class="property-info-bottom">
@@ -134,70 +134,70 @@ class PropertyView {
 
                 <div class="property-info-content my-5">
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Subdivision</p>
+                    <p class="font-medium text-stone-950">Subdivision:</p>
                     <p class="agent-name text-stone-600">${
                       property.subdivision
                     }</p>
                   </div>
 
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Location</p>
+                    <p class="font-medium text-stone-950">Location:</p>
                     <p class="property-built text-stone-600">${
                       property.location
                     }</p>
                   </div>
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Type</p>
+                    <p class="font-medium text-stone-950">Type:</p>
                     <p class="property-type text-stone-600">
                       ${property.propertyType}
                     </p>
                   </div>
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Lot Area</p>
+                    <p class="font-medium text-stone-950">Lot Area:</p>
                     <p class="property-area text-stone-600">${
                       property.area
                     } sqm</p>
                   </div>
                    <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Floor Area</p>
+                    <p class="font-medium text-stone-950">Floor Area:</p>
                     <p class="property-area text-stone-600">${
                       property.floorarea
                     } sqm</p>
                   </div>
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Bedrooms</p>
+                    <p class="font-medium text-stone-950">Bedrooms:</p>
                     <p class="bedroom-info text-stone-600">
                       <span class="number-of-beds">${
                         property?.bedrooms ?? "No"
-                      }</span> Bedrooms
+                      }</span>
                     </p>
                   </div>
                   <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Toilet & Bath</p>
+                    <p class="font-medium text-stone-950">Toilet & Bath:</p>
                     <p class="bathroom-info text-stone-600">
                       <span class="number-of-baths">${
                         property?.bathrooms ?? "No"
-                      }</span> Bathrooms
+                      }</span>
                     </p>
                   </div>
                    <div
-                    class="content flex justify-between border border-x-0 border-t-0 py-3"
+                    class="content flex items-center gap-2 border border-x-0 border-t-0 py-3"
                   >
-                    <p class="font-medium text-stone-950">Car Garage</p>
+                    <p class="font-medium text-stone-950">Car Garage:</p>
                     <p class="property-area text-stone-600">${
                       property.garage
                     }</p>
