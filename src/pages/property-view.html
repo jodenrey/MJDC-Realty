@@ -71,6 +71,23 @@
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/custom.css" />
 
+    <!-- Custom styles for video aspect ratio -->
+    <style>
+      .aspect-w-16 {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+      }
+      .aspect-w-16 iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
     <title></title>
   </head>
   <body class="bg-orange-50">
@@ -218,6 +235,21 @@
         class="container property-view-container mx-auto max-w-screen-2xl"
       ></div>
     </section>
+
+    <section class="property-video-section p-4 pb-8 font-body hidden">
+      <div class="container property-video-container mx-auto max-w-screen-2xl">
+        <div class="container-title">
+          <p class="uppercase text-stone-600 text-sm tracking-wide">Video Tour</p>
+          <h2 class="text-stone-950 text-3xl font-heading md:text-4xl">
+            Property Video
+          </h2>
+        </div>
+        <div class="property-video-wrap mt-8">
+          <!-- Video content will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+
     <section class="property-gallery-section p-4 font-body pb-16 md:pt-16">
       <div class="container gallery-view-container mx-auto max-w-screen-2xl">
         <div class="container-title">

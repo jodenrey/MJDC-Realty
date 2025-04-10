@@ -7,6 +7,7 @@ class PropertyView {
   #slug = this.#urlParams.get("slug");
   #Topsection = document.querySelector(".property-view-section");
   #bottomSection = document.querySelector(".property-gallery-section");
+  #videoSection = document.querySelector(".property-video-section");
 
   constructor() {
     this._validateAndFetchSlug();
@@ -25,13 +26,15 @@ class PropertyView {
     _showLoader();
 
     try {
-      const entries = await client.getEntries();
+      const entries = await client.getEntries({
+        content_type: 'property'  // Explicitly specify the content type
+      });
 
       if (!entries) {
         _hideLoader();
         return;
       }
-
+      
       const property = entries.items.find(
         (entry) => entry.fields.slug === this.#slug
       );
@@ -66,6 +69,19 @@ class PropertyView {
     if (!container || !galleryGrid) return;
 
     container.innerHTML = this._createPropertyInfo(property.fields);
+    
+    // Handle video if exists
+    if (property.fields.propertyVideo) {
+      try {
+        this._setPropertyVideo(property.fields.propertyVideo);
+        this.#videoSection.classList.remove("hidden");
+      } catch (err) {
+        this.#videoSection.classList.add("hidden");
+      }
+    } else {
+      this.#videoSection.classList.add("hidden");
+    }
+    
     galleryGrid.innerHTML = this._createPropertyGallery(
       property.fields.propertyGallery
     );
@@ -276,6 +292,93 @@ class PropertyView {
       </div>
     </div>
   </div>`;
+  }
+
+  _setPropertyVideo(videoData) {
+    if (!videoData) {
+      return;
+    }
+    
+    const videoWrap = this.#videoSection.querySelector(".property-video-wrap");
+    if (!videoWrap) {
+      return;
+    }
+    
+    let url;
+    
+    // Handle both direct URL string and reference object structures
+    if (typeof videoData === 'string') {
+      url = videoData;
+    } else if (videoData.fields && videoData.fields.url) {
+      url = videoData.fields.url;
+    } else if (videoData.fields) {
+      // Try to find any URL-like field
+      const potentialUrlFields = Object.keys(videoData.fields).filter(key => 
+        typeof videoData.fields[key] === 'string' && 
+        (videoData.fields[key].includes('youtube.com') || 
+         videoData.fields[key].includes('youtu.be'))
+      );
+      
+      if (potentialUrlFields.length > 0) {
+        url = videoData.fields[potentialUrlFields[0]];
+      }
+    }
+    
+    if (!url) {
+      return;
+    }
+    
+    // Check if it's a YouTube URL
+    if (this._isYouTubeUrl(url)) {
+      const embedUrl = this._getYouTubeEmbedUrl(url);
+      
+      videoWrap.innerHTML = `
+        <div class="aspect-w-16">
+          <iframe 
+            src="${embedUrl}" 
+            class="w-full h-full rounded-lg"
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        ${videoData.fields?.description ? `<p class="text-sm text-stone-600 mt-2">${videoData.fields.description}</p>` : ''}
+      `;
+    } else {
+      // Handle direct video file
+      videoWrap.innerHTML = `
+        <video 
+          controls 
+          class="w-full rounded-lg max-h-[600px]"
+          poster="${videoData.fields?.thumbnail?.fields?.file?.url || ''}"
+        >
+          <source src="${url}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        ${videoData.fields?.description ? `<p class="text-sm text-stone-600 mt-2">${videoData.fields.description}</p>` : ''}
+      `;
+    }
+  }
+
+  _isYouTubeUrl(url) {
+    return url.includes('youtube.com') || url.includes('youtu.be');
+  }
+
+  _getYouTubeEmbedUrl(url) {
+    let videoId = '';
+    
+    // Handle different YouTube URL formats
+    if (url.includes('youtube.com/watch')) {
+      const urlParams = new URLSearchParams(new URL(url).search);
+      videoId = urlParams.get('v');
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/embed/')) {
+      videoId = url.split('youtube.com/embed/')[1].split('?')[0];
+    }
+    
+    return `https://www.youtube.com/embed/${videoId}`;
   }
 
   _createPropertyGallery(property) {
