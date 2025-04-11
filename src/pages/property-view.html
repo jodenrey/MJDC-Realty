@@ -70,6 +70,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/custom.css" />
+    <link rel="stylesheet" href="../css/loan-calculator.css" />
 
     <!-- Custom styles for video aspect ratio -->
     <style>
@@ -264,6 +265,144 @@
         ></div>
       </div>
     </section>
+
+    <section class="loan-calculator-section">
+      <div class="container mx-auto max-w-screen-2xl">
+        <div class="container-title">
+          <p class="uppercase text-stone-600 text-sm tracking-wide">Financing</p>
+          <h2 class="text-stone-950 text-3xl font-heading md:text-4xl">
+            Loan Calculator
+          </h2>
+        </div>
+
+        <div id="loan-calculator-container">
+          <form id="loan-calculator">
+            <h3>Calculate Your Monthly Payments</h3>
+
+            <div class="input-group">
+              <label for="contract_price">Contract Price:</label>
+              <input type="number" id="contract_price" value="0">
+            </div>
+
+            <div id="special_discount_input_wrap" class="discount-input-wrap" style="display:none;">
+              <div class="input-group">
+                <label for="special_Input_Discount">TCP Discount:</label>
+                <input type="number" id="special_Input_Discount" value="0">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="downpayment_percent">Downpayment (%):</label>
+              <input type="number" id="downpayment_percent" value="20">
+            </div>
+            
+            <div id="additional_discount_input_wrap" class="discount-input-wrap" style="display:none;">
+              <div class="input-group">
+                <label for="additional_Input_Discount">DP Discount:</label>
+                <input type="number" id="additional_Input_Discount" value="0">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="reservation_fee">Reservation Fee:</label>
+              <input type="number" id="reservation_fee" value="20000">
+            </div>
+
+            <div class="input-group">
+              <label for="months">Downpayment Term (Months):</label>
+              <input type="number" id="months" value="12">
+            </div>
+
+            <div class="input-group">
+              <label for="years">Bank Term (Years):</label>
+              <input type="number" id="years" value="20">
+            </div>
+
+            <div class="input-group">
+              <label for="interest_rate">Annual Interest Rate (%):</label>
+              <input type="number" id="interest_rate" value="7">
+            </div>
+
+            <div>
+              <button type="button" class="calculator-btn" onclick="calculateLoan()">Calculate Payment</button>
+            </div>
+          </form>
+
+          <div id="loan-breakdown">
+            <h3>Payment Breakdown</h3>
+            <div id="special_discount_row" style="display:none;">
+              <div class="result-row">
+                <span><strong>Contract Price:</strong></span>
+                <span id="result_contract_price">0</span>
+              </div>
+              <div class="result-row">
+                <span>Less: Discount:</span>
+                <span id="special_discount_display" class="discount-value">0</span>
+              </div>
+            </div>
+            
+            <div class="result-row highlight">
+              <span><strong>Total Contract Price:</strong></span>
+              <span id="net_contract_price">0</span>
+            </div>
+            
+            <div class="result-row">
+              <span><strong><span id="dp_percent">20%</span> Downpayment:</strong></span>
+              <span id="downpayment">0</span>
+            </div>
+            
+            <div class="result-row">
+              <span>Less Reservation Fee:</span>
+              <span id="reservation_fee_display" class="discount-value">0</span>
+            </div>
+            
+            <div id="additional_discount_row" class="result-row" style="display:none;">
+              <span>Less: DP Discount:</span>
+              <span id="discount_display" class="discount-value">0</span>
+            </div>
+            
+            <div class="result-row highlight">
+              <span><strong>Net Downpayment:</strong></span>
+              <span id="net_downpayment">0</span>
+            </div>
+            
+            <div class="result-row">
+              <span>Payable in <strong><span id="months_display" class="highlight-value">12</span></strong> months:</span>
+              <span id="monthly_downpayment" class="highlight-value">0</span>/mo
+            </div>
+            
+            <div class="result-row">
+              <span><strong><span id="balance_percent">80%</span> Balance:</strong></span>
+              <span id="balance">0</span>
+            </div>
+            
+            <div class="result-row">
+              <span>Payable through Bank Financing</span>
+            </div>
+            
+            <div class="result-row highlight">
+              <span>In <strong><span id="years_display" class="highlight-value">20</span></strong> years:</span>
+              <span><span id="monthly_financing" class="highlight-value">0</span>/mo</span>
+            </div>
+            
+            <p class="note-text">Note: Discounts are provided exclusively by the developer, not the agent.</p>
+            
+            <div class="toggle-options">
+              <label class="toggle-option">
+                <input type="checkbox" id="toggle_special_discount">
+                <span>TCP Discount</span>
+              </label>
+
+              <label class="toggle-option">
+                <input type="checkbox" id="toggle_additional_discount">
+                <span>DP Discount</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="foooter-section pt-12 font-body md:pt-20">
       <div
         class="footer-contact-us-wrappper p-5 py-20 flex flex-col items-center gap-4 md:py-32"

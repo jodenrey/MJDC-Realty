@@ -8,6 +8,7 @@ class PropertyView {
   #Topsection = document.querySelector(".property-view-section");
   #bottomSection = document.querySelector(".property-gallery-section");
   #videoSection = document.querySelector(".property-video-section");
+  #loanCalculatorSection = document.querySelector(".loan-calculator-section");
 
   constructor() {
     this._validateAndFetchSlug();
@@ -55,6 +56,7 @@ class PropertyView {
 
     _hideLoader();
     this._generateMarkup(property);
+    this._initializeLoanCalculator(property.fields.price);
   }
 
   _generateMarkup(property) {
@@ -397,6 +399,122 @@ class PropertyView {
       .join("");
 
     return generateGallery;
+  }
+  
+  _initializeLoanCalculator(propertyPrice) {
+    // Extract numeric value from the price string
+    if (!propertyPrice) return;
+    
+    const priceValue = this._extractNumericPrice(propertyPrice);
+    
+    if (priceValue > 0) {
+      // Set the contract price in the calculator
+      const contractPriceInput = document.getElementById('contract_price');
+      if (contractPriceInput) {
+        contractPriceInput.value = priceValue;
+      }
+      
+      // Setup calculator event listeners
+      this._setupLoanCalculator();
+      
+      // Show the calculator section
+      this.#loanCalculatorSection.classList.remove('hidden');
+    } else {
+      // Hide the calculator if we can't get a valid price
+      this.#loanCalculatorSection.classList.add('hidden');
+    }
+  }
+  
+  _extractNumericPrice(priceString) {
+    if (!priceString) return 0;
+    
+    // Extract only digits from the price string
+    const numericValue = priceString.replace(/[^\d]/g, '');
+    
+    // Parse as integer and then divide by 100 to handle the cents
+    // (since the last 2 digits represent cents)
+    return numericValue ? parseFloat(numericValue) / 100 : 0;
+  }
+  
+  _setupLoanCalculator() {
+    // Add the global calculator function
+    window.calculateLoan = function() {
+      let contractPrice = parseFloat(document.getElementById('contract_price').value) || 0;
+      let showSpecial = document.getElementById('toggle_special_discount').checked;
+      let showAdditional = document.getElementById('toggle_additional_discount').checked;
+
+      let specialDiscount = showSpecial ? parseFloat(document.getElementById('special_Input_Discount').value) || 0 : 0;
+      let discount = showAdditional ? parseFloat(document.getElementById('additional_Input_Discount').value) || 0 : 0;
+
+      let downpaymentPercent = parseFloat(document.getElementById('downpayment_percent').value) || 0;
+      let reservationFee = parseFloat(document.getElementById('reservation_fee').value) || 0;
+      let months = parseInt(document.getElementById('months').value) || 1;
+      let years = parseInt(document.getElementById('years').value) || 1;
+      let interestRate = parseFloat(document.getElementById('interest_rate').value) / 100 || 0;
+
+      let netContractPrice = contractPrice - specialDiscount;
+      let downpaymentAmount = netContractPrice * (downpaymentPercent / 100);
+      let netDownpayment = downpaymentAmount - reservationFee - discount;
+      let monthlyDownpayment = netDownpayment / months;
+      let balance = netContractPrice - downpaymentAmount;
+
+      let monthlyInterestRate = interestRate / 12;
+      let nper = years * 12;
+      let monthlyFinancing = (monthlyInterestRate > 0)
+          ? (balance * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -nper))
+          : (balance / nper);
+
+      // Update UI with formatted values
+      document.getElementById('result_contract_price').innerText = contractPrice.toLocaleString();
+      document.getElementById('special_discount_display').innerText = specialDiscount.toLocaleString();
+      document.getElementById('discount_display').innerText = discount.toLocaleString();
+      document.getElementById('net_contract_price').innerText = netContractPrice.toLocaleString();
+      document.getElementById('downpayment').innerText = downpaymentAmount.toLocaleString();
+      document.getElementById('reservation_fee_display').innerText = reservationFee.toLocaleString();
+      document.getElementById('net_downpayment').innerText = netDownpayment.toLocaleString();
+      document.getElementById('monthly_downpayment').innerText = monthlyDownpayment.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      document.getElementById('balance').innerText = balance.toLocaleString();
+      document.getElementById('monthly_financing').innerText = monthlyFinancing.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      
+      document.getElementById('months_display').innerText = months;
+      document.getElementById('years_display').innerText = years;
+      document.getElementById('dp_percent').innerText = downpaymentPercent + "%";
+      document.getElementById('balance_percent').innerText = (100 - downpaymentPercent) + "%";
+
+      // Show/hide breakdown rows
+      document.getElementById('special_discount_row').style.display = showSpecial ? 'block' : 'none';
+      document.getElementById('additional_discount_row').style.display = showAdditional ? 'block' : 'none';
+    };
+
+    // Initialize toggle controls
+    const toggleSpecial = document.getElementById('toggle_special_discount');
+    const toggleAdditional = document.getElementById('toggle_additional_discount');
+    const specialInputWrap = document.getElementById('special_discount_input_wrap');
+    const additionalInputWrap = document.getElementById('additional_discount_input_wrap');
+
+    if (toggleSpecial) {
+      toggleSpecial.addEventListener('change', () => {
+        specialInputWrap.style.display = toggleSpecial.checked ? 'block' : 'none';
+        calculateLoan();
+      });
+    }
+
+    if (toggleAdditional) {
+      toggleAdditional.addEventListener('change', () => {
+        additionalInputWrap.style.display = toggleAdditional.checked ? 'block' : 'none';
+        calculateLoan();
+      });
+    }
+    
+    // Run initial calculation
+    calculateLoan();
   }
 }
 
