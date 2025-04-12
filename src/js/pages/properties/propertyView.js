@@ -8,6 +8,7 @@ class PropertyView {
   #Topsection = document.querySelector(".property-view-section");
   #bottomSection = document.querySelector(".property-gallery-section");
   #videoSection = document.querySelector(".property-video-section");
+  #mapsSection = document.querySelector(".property-maps-section");
   #loanCalculatorSection = document.querySelector(".loan-calculator-section");
 
   constructor() {
@@ -87,10 +88,24 @@ class PropertyView {
     // Generate gallery carousel markup
     this._createPropertyGallery(property.fields.propertyGallery);
     
-    // Initialize the carousel
+    // Initialize the gallery carousel
     this._initializeGalleryCarousel();
     
-    pageTitle.innerHTML = `${property.fields.title} - Roofly Properties`;
+    // Handle maps if exists
+    if (property.fields.propertyMaps && property.fields.propertyMaps.length) {
+      try {
+        this._createPropertyMaps(property.fields.propertyMaps);
+        this._initializeMapsCarousel();
+        this.#mapsSection.classList.remove("hidden");
+      } catch (err) {
+        console.error("Error loading maps:", err);
+        this.#mapsSection.classList.add("hidden");
+      }
+    } else {
+      this.#mapsSection.classList.add("hidden");
+    }
+    
+    pageTitle.innerHTML = `${property.fields.title} - MJDC Realty`;
   }
 
   _renderRichText(richTextField) {
@@ -524,6 +539,147 @@ class PropertyView {
           // Mount the carousels
           mainCarousel.mount();
           thumbnailCarousel.mount();
+        }
+      }, 100);
+    }
+  }
+  
+  _createPropertyMaps(mapItems) {
+    if (!mapItems || !mapItems.length) return;
+    
+    const mainCarouselList = document.querySelector('#maps-main-carousel .splide__list');
+    const thumbnailCarouselList = document.querySelector('#maps-thumbnail-carousel .splide__list');
+    
+    if (!mainCarouselList || !thumbnailCarouselList) return;
+    
+    // Clear previous content
+    mainCarouselList.innerHTML = '';
+    thumbnailCarouselList.innerHTML = '';
+    
+    // Generate slides for both main and thumbnail carousels
+    mapItems.forEach((item) => {
+      const { description, file } = item.fields;
+      
+      // Main carousel slide
+      mainCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img src="${file.url}" alt="${description || 'Property map'}" loading="lazy" />
+        </li>
+      `;
+      
+      // Thumbnail carousel slide
+      thumbnailCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img src="${file.url}" alt="${description || 'Map thumbnail'}" loading="lazy" />
+        </li>
+      `;
+    });
+  }
+  
+  _initializeMapsCarousel() {
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const initMapsCarousels = () => {
+        // Create the main maps carousel
+        const mainMapsCarousel = new Splide('#maps-main-carousel', {
+          type: 'slide',
+          perPage: 1,
+          perMove: 1,
+          gap: 10,
+          padding: { left: 0, right: 0 },
+          rewind: true,
+          pagination: true,
+          arrows: true,
+          lazyLoad: 'sequential',
+          heightRatio: 0.6,
+          breakpoints: {
+            768: {
+              heightRatio: 0.5,
+              padding: { left: 0, right: 0 }
+            }
+          }
+        });
+        
+        // Create the thumbnail maps carousel
+        const thumbnailMapsCarousel = new Splide('#maps-thumbnail-carousel', {
+          fixedWidth: 80,
+          fixedHeight: 60,
+          gap: 10,
+          rewind: true,
+          pagination: false,
+          isNavigation: true,
+          arrows: true,
+          focus: 'center',
+          breakpoints: {
+            768: {
+              fixedWidth: 60,
+              fixedHeight: 45
+            }
+          }
+        });
+        
+        // Set up syncing between the main carousel and thumbnails
+        mainMapsCarousel.sync(thumbnailMapsCarousel);
+        
+        // Mount the carousels
+        mainMapsCarousel.mount();
+        thumbnailMapsCarousel.mount();
+      };
+      
+      // Initialize maps carousels
+      if (document.querySelector('#maps-main-carousel')) {
+        initMapsCarousels();
+      }
+    });
+    
+    // Also initialize immediately in case DOM is already loaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(() => {
+        if (document.querySelector('#maps-main-carousel')) {
+          // Create the main maps carousel
+          const mainMapsCarousel = new Splide('#maps-main-carousel', {
+            type: 'slide',
+            perPage: 1,
+            perMove: 1,
+            gap: 10,
+            padding: { left: 0, right: 0 },
+            rewind: true,
+            pagination: true,
+            arrows: true,
+            lazyLoad: 'sequential',
+            heightRatio: 0.6,
+            breakpoints: {
+              768: {
+                heightRatio: 0.5,
+                padding: { left: 0, right: 0 }
+              }
+            }
+          });
+          
+          // Create the thumbnail maps carousel
+          const thumbnailMapsCarousel = new Splide('#maps-thumbnail-carousel', {
+            fixedWidth: 80,
+            fixedHeight: 60,
+            gap: 10,
+            rewind: true,
+            pagination: false,
+            isNavigation: true,
+            arrows: true,
+            focus: 'center',
+            breakpoints: {
+              768: {
+                fixedWidth: 60,
+                fixedHeight: 45
+              }
+            }
+          });
+          
+          // Set up syncing between the main carousel and thumbnails
+          mainMapsCarousel.sync(thumbnailMapsCarousel);
+          
+          // Mount the carousels
+          mainMapsCarousel.mount();
+          thumbnailMapsCarousel.mount();
         }
       }, 100);
     }
