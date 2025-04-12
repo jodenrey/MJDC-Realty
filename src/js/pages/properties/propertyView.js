@@ -63,12 +63,12 @@ class PropertyView {
     const container = this.#Topsection.querySelector(
       ".property-view-container"
     );
-    const galleryGrid = this.#bottomSection.querySelector(
-      ".property-gallery-grid"
+    const galleryWrap = this.#bottomSection.querySelector(
+      ".property-gallery-wrap"
     );
     const pageTitle = document.querySelector("title");
 
-    if (!container || !galleryGrid) return;
+    if (!container || !galleryWrap) return;
 
     container.innerHTML = this._createPropertyInfo(property.fields);
     
@@ -84,9 +84,12 @@ class PropertyView {
       this.#videoSection.classList.add("hidden");
     }
     
-    galleryGrid.innerHTML = this._createPropertyGallery(
-      property.fields.propertyGallery
-    );
+    // Generate gallery carousel markup
+    this._createPropertyGallery(property.fields.propertyGallery);
+    
+    // Initialize the carousel
+    this._initializeGalleryCarousel();
+    
     pageTitle.innerHTML = `${property.fields.title} - Roofly Properties`;
   }
 
@@ -350,14 +353,16 @@ class PropertyView {
     } else {
       // Handle direct video file
       videoWrap.innerHTML = `
-        <video 
-          controls 
-          class="w-full rounded-lg max-h-[600px]"
-          poster="${videoData.fields?.thumbnail?.fields?.file?.url || ''}"
-        >
-          <source src="${url}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="video-container flex justify-center">
+          <video 
+            controls 
+            class="rounded-lg"
+            poster="${videoData.fields?.thumbnail?.fields?.file?.url || ''}"
+          >
+            <source src="${url}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
         ${videoData.fields?.description ? `<p class="text-sm text-stone-600 mt-2">${videoData.fields.description}</p>` : ''}
       `;
     }
@@ -383,22 +388,145 @@ class PropertyView {
     return `https://www.youtube.com/embed/${videoId}`;
   }
 
-  _createPropertyGallery(property) {
-    const generateGallery = property
-      .map((items) => {
-        const { description, file } = items.fields;
-
-        return `
-      <div class="property-imgages">
-          <img
-                src="${file.url}"
-                alt="${description}"
-                class="rounded-lg"/>
-      </div>`;
-      })
-      .join("");
-
-    return generateGallery;
+  _createPropertyGallery(galleryItems) {
+    if (!galleryItems || !galleryItems.length) return;
+    
+    const mainCarouselList = document.querySelector('#main-carousel .splide__list');
+    const thumbnailCarouselList = document.querySelector('#thumbnail-carousel .splide__list');
+    
+    if (!mainCarouselList || !thumbnailCarouselList) return;
+    
+    // Clear previous content
+    mainCarouselList.innerHTML = '';
+    thumbnailCarouselList.innerHTML = '';
+    
+    // Generate slides for both main and thumbnail carousels
+    galleryItems.forEach((item) => {
+      const { description, file } = item.fields;
+      
+      // Main carousel slide
+      mainCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img src="${file.url}" alt="${description || 'Property image'}" loading="lazy" />
+        </li>
+      `;
+      
+      // Thumbnail carousel slide
+      thumbnailCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img src="${file.url}" alt="${description || 'Property thumbnail'}" loading="lazy" />
+        </li>
+      `;
+    });
+  }
+  
+  _initializeGalleryCarousel() {
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const initCarousels = () => {
+        // Create the main carousel
+        const mainCarousel = new Splide('#main-carousel', {
+          type: 'slide',
+          perPage: 1,
+          perMove: 1,
+          gap: 10,
+          padding: { left: 0, right: 0 },
+          rewind: true,
+          pagination: true,
+          arrows: true,
+          lazyLoad: 'sequential',
+          heightRatio: 0.6,
+          breakpoints: {
+            768: {
+              heightRatio: 0.5,
+              padding: { left: 0, right: 0 }
+            }
+          }
+        });
+        
+        // Create the thumbnail carousel
+        const thumbnailCarousel = new Splide('#thumbnail-carousel', {
+          fixedWidth: 80,
+          fixedHeight: 60,
+          gap: 10,
+          rewind: true,
+          pagination: false,
+          isNavigation: true,
+          arrows: true,
+          focus: 'center',
+          breakpoints: {
+            768: {
+              fixedWidth: 60,
+              fixedHeight: 45
+            }
+          }
+        });
+        
+        // Set up syncing between the main carousel and thumbnails
+        mainCarousel.sync(thumbnailCarousel);
+        
+        // Mount the carousels
+        mainCarousel.mount();
+        thumbnailCarousel.mount();
+      };
+      
+      // Initialize carousels
+      if (document.querySelector('#main-carousel')) {
+        initCarousels();
+      }
+    });
+    
+    // Also initialize immediately in case DOM is already loaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(() => {
+        if (document.querySelector('#main-carousel')) {
+          // Create the main carousel
+          const mainCarousel = new Splide('#main-carousel', {
+            type: 'slide',
+            perPage: 1,
+            perMove: 1,
+            gap: 10,
+            padding: { left: 0, right: 0 },
+            rewind: true,
+            pagination: true,
+            arrows: true,
+            lazyLoad: 'sequential',
+            heightRatio: 0.6,
+            breakpoints: {
+              768: {
+                heightRatio: 0.5,
+                padding: { left: 0, right: 0 }
+              }
+            }
+          });
+          
+          // Create the thumbnail carousel
+          const thumbnailCarousel = new Splide('#thumbnail-carousel', {
+            fixedWidth: 80,
+            fixedHeight: 60,
+            gap: 10,
+            rewind: true,
+            pagination: false,
+            isNavigation: true,
+            arrows: true,
+            focus: 'center',
+            breakpoints: {
+              768: {
+                fixedWidth: 60,
+                fixedHeight: 45
+              }
+            }
+          });
+          
+          // Set up syncing between the main carousel and thumbnails
+          mainCarousel.sync(thumbnailCarousel);
+          
+          // Mount the carousels
+          mainCarousel.mount();
+          thumbnailCarousel.mount();
+        }
+      }, 100);
+    }
   }
   
   _initializeLoanCalculator(propertyPrice) {
