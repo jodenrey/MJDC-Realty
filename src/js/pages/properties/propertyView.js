@@ -10,9 +10,16 @@ class PropertyView {
   #videoSection = document.querySelector(".property-video-section");
   #mapsSection = document.querySelector(".property-maps-section");
   #loanCalculatorSection = document.querySelector(".loan-calculator-section");
+  #fullscreenOverlay = document.querySelector(".fullscreen-overlay");
+  #fullscreenImage = document.querySelector(".fullscreen-image");
+  #fullscreenCaption = document.querySelector(".fullscreen-caption");
+  #fullscreenImages = []; // Will store all images for fullscreen navigation
+  #currentFullscreenIndex = 0;
+  #fullscreenSource = ''; // To track which carousel is active in fullscreen ('gallery' or 'maps')
 
   constructor() {
     this._validateAndFetchSlug();
+    this._setupFullscreenEvents();
   }
 
   _validateAndFetchSlug() {
@@ -416,13 +423,20 @@ class PropertyView {
     thumbnailCarouselList.innerHTML = '';
     
     // Generate slides for both main and thumbnail carousels
-    galleryItems.forEach((item) => {
+    galleryItems.forEach((item, index) => {
       const { description, file } = item.fields;
       
-      // Main carousel slide
+      // Main carousel slide with data attributes for fullscreen
       mainCarouselList.innerHTML += `
         <li class="splide__slide">
-          <img src="${file.url}" alt="${description || 'Property image'}" loading="lazy" />
+          <img 
+            src="${file.url}" 
+            alt="${description || 'Property image'}" 
+            loading="lazy"
+            data-index="${index}" 
+            data-source="gallery"
+            class="fullscreen-trigger" 
+          />
         </li>
       `;
       
@@ -433,8 +447,156 @@ class PropertyView {
         </li>
       `;
     });
+
+    // Add click event listeners after a small delay to ensure DOM is ready
+    setTimeout(() => this._setupFullscreenTriggers('gallery'), 200);
   }
-  
+
+  _createPropertyMaps(mapItems) {
+    if (!mapItems || !mapItems.length) return;
+    
+    const mainCarouselList = document.querySelector('#maps-main-carousel .splide__list');
+    const thumbnailCarouselList = document.querySelector('#maps-thumbnail-carousel .splide__list');
+    
+    if (!mainCarouselList || !thumbnailCarouselList) return;
+    
+    // Clear previous content
+    mainCarouselList.innerHTML = '';
+    thumbnailCarouselList.innerHTML = '';
+    
+    // Generate slides for both main and thumbnail carousels
+    mapItems.forEach((item, index) => {
+      const { description, file } = item.fields;
+      
+      // Main carousel slide with data attributes for fullscreen
+      mainCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img 
+            src="${file.url}" 
+            alt="${description || 'Property map'}" 
+            loading="lazy"
+            data-index="${index}" 
+            data-source="maps"
+            class="fullscreen-trigger" 
+          />
+        </li>
+      `;
+      
+      // Thumbnail carousel slide
+      thumbnailCarouselList.innerHTML += `
+        <li class="splide__slide">
+          <img src="${file.url}" alt="${description || 'Map thumbnail'}" loading="lazy" />
+        </li>
+      `;
+    });
+
+    // Add click event listeners after a small delay to ensure DOM is ready
+    setTimeout(() => this._setupFullscreenTriggers('maps'), 200);
+  }
+
+  _setupFullscreenEvents() {
+    if (!this.#fullscreenOverlay) return;
+
+    // Close button event
+    const closeButton = this.#fullscreenOverlay.querySelector(".fullscreen-close");
+    if (closeButton) {
+      closeButton.addEventListener("click", this._closeFullscreen.bind(this));
+    }
+
+    // Navigation buttons events
+    const prevButton = this.#fullscreenOverlay.querySelector(".fullscreen-prev");
+    const nextButton = this.#fullscreenOverlay.querySelector(".fullscreen-next");
+    
+    if (prevButton) {
+      prevButton.addEventListener("click", () => {
+        this._navigateFullscreen(-1);
+      });
+    }
+    
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        this._navigateFullscreen(1);
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (!this.#fullscreenOverlay || this.#fullscreenOverlay.style.display !== 'flex') return;
+      
+      if (e.key === "Escape") {
+        this._closeFullscreen();
+      } else if (e.key === "ArrowLeft") {
+        this._navigateFullscreen(-1);
+      } else if (e.key === "ArrowRight") {
+        this._navigateFullscreen(1);
+      }
+    });
+  }
+
+  _setupFullscreenTriggers(source) {
+    const selector = source === 'maps' ? '#maps-main-carousel .fullscreen-trigger' : '#main-carousel .fullscreen-trigger';
+    const triggers = document.querySelectorAll(selector);
+    
+    triggers.forEach(img => {
+      img.addEventListener('click', (e) => {
+        const index = parseInt(e.target.dataset.index);
+        const imgSource = e.target.dataset.source;
+        this._openFullscreen(index, imgSource);
+      });
+    });
+  }
+
+  _openFullscreen(index, source) {
+    if (!this.#fullscreenOverlay || !this.#fullscreenImage) return;
+    
+    this.#fullscreenSource = source;
+    this.#currentFullscreenIndex = index;
+    
+    // Get all images from the appropriate carousel
+    const selector = source === 'maps' ? '#maps-main-carousel .splide__slide img' : '#main-carousel .splide__slide img';
+    const images = document.querySelectorAll(selector);
+    
+    // Store image sources and captions for navigation
+    this.#fullscreenImages = Array.from(images).map(img => ({
+      src: img.src,
+      alt: img.alt
+    }));
+    
+    // Set the current image
+    if (this.#fullscreenImages[index]) {
+      this.#fullscreenImage.src = this.#fullscreenImages[index].src;
+      this.#fullscreenCaption.textContent = this.#fullscreenImages[index].alt;
+    }
+    
+    // Show the overlay
+    this.#fullscreenOverlay.style.display = 'flex';
+    
+    // Prevent body scrolling while fullscreen is active
+    document.body.style.overflow = 'hidden';
+  }
+
+  _navigateFullscreen(direction) {
+    if (!this.#fullscreenImages.length) return;
+    
+    // Calculate the new index with wrapping
+    this.#currentFullscreenIndex = (this.#currentFullscreenIndex + direction + this.#fullscreenImages.length) % this.#fullscreenImages.length;
+    
+    // Update image and caption
+    const currentImage = this.#fullscreenImages[this.#currentFullscreenIndex];
+    this.#fullscreenImage.src = currentImage.src;
+    this.#fullscreenCaption.textContent = currentImage.alt;
+  }
+
+  _closeFullscreen() {
+    if (!this.#fullscreenOverlay) return;
+    
+    // Hide the overlay
+    this.#fullscreenOverlay.style.display = 'none';
+    
+    // Restore body scrolling
+    document.body.style.overflow = '';
+  }
+
   _initializeGalleryCarousel() {
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
@@ -542,38 +704,6 @@ class PropertyView {
         }
       }, 100);
     }
-  }
-  
-  _createPropertyMaps(mapItems) {
-    if (!mapItems || !mapItems.length) return;
-    
-    const mainCarouselList = document.querySelector('#maps-main-carousel .splide__list');
-    const thumbnailCarouselList = document.querySelector('#maps-thumbnail-carousel .splide__list');
-    
-    if (!mainCarouselList || !thumbnailCarouselList) return;
-    
-    // Clear previous content
-    mainCarouselList.innerHTML = '';
-    thumbnailCarouselList.innerHTML = '';
-    
-    // Generate slides for both main and thumbnail carousels
-    mapItems.forEach((item) => {
-      const { description, file } = item.fields;
-      
-      // Main carousel slide
-      mainCarouselList.innerHTML += `
-        <li class="splide__slide">
-          <img src="${file.url}" alt="${description || 'Property map'}" loading="lazy" />
-        </li>
-      `;
-      
-      // Thumbnail carousel slide
-      thumbnailCarouselList.innerHTML += `
-        <li class="splide__slide">
-          <img src="${file.url}" alt="${description || 'Map thumbnail'}" loading="lazy" />
-        </li>
-      `;
-    });
   }
   
   _initializeMapsCarousel() {

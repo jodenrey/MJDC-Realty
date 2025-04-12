@@ -225,6 +225,109 @@
           max-height: 350px;
         }
       }
+      
+      /* Fullscreen image overlay */
+      .fullscreen-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 10000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      
+      .fullscreen-image-container {
+        position: relative;
+        max-width: 90vw;
+        max-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .fullscreen-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+      
+      .fullscreen-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10001;
+      }
+      
+      .fullscreen-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 10001;
+      }
+      
+      .fullscreen-prev {
+        left: 20px;
+      }
+      
+      .fullscreen-next {
+        right: 20px;
+      }
+      
+      .fullscreen-caption {
+        color: white;
+        margin-top: 10px;
+        text-align: center;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+      }
+      
+      /* Make carousel images clickable */
+      .splide__slide img {
+        cursor: pointer;
+      }
+      
+      /* Responsive adjustments for fullscreen view */
+      @media (max-width: 768px) {
+        .fullscreen-nav {
+          width: 35px;
+          height: 35px;
+        }
+        
+        .fullscreen-close {
+          width: 35px;
+          height: 35px;
+          top: 10px;
+          right: 10px;
+        }
+      }
+      
     </style>
 
     <title></title>
@@ -518,7 +621,7 @@
               </div>
             </div>
             
-            <div class="result-row highlight">
+            <div class="result-row">
               <span><strong>Total Contract Price:</strong></span>
               <span id="net_contract_price">0</span>
             </div>
@@ -538,7 +641,7 @@
               <span id="discount_display" class="discount-value">0</span>
             </div>
             
-            <div class="result-row highlight">
+            <div class="result-row">
               <span><strong>Net Downpayment:</strong></span>
               <span id="net_downpayment">0</span>
             </div>
@@ -557,7 +660,7 @@
               <span>Payable through Bank Financing</span>
             </div>
             
-            <div class="result-row highlight">
+            <div class="result-row">
               <span>In <strong><span id="years_display" class="highlight-value">20</span></strong> years:</span>
               <span><span id="monthly_financing" class="highlight-value">0</span>/mo</span>
             </div>
@@ -694,6 +797,18 @@
         </div>
       </div>
     </footer>
+
+    <!-- Fullscreen image overlay -->
+    <div class="fullscreen-overlay">
+      <div class="fullscreen-close">&times;</div>
+      <div class="fullscreen-image-container">
+        <div class="fullscreen-nav fullscreen-prev">&lt;</div>
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Fullscreen property image" class="fullscreen-image">
+        <div class="fullscreen-nav fullscreen-next">&gt;</div>
+      </div>
+      <div class="fullscreen-caption"></div>
+    </div>
+    
     <script defer type="module" src="../js/main.js"></script>
     <script
       defer
