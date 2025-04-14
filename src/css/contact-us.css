@@ -99,4 +99,9 @@ textarea {
   #terms-condition {
     margin-top: 0px;
   }
+  /* Notification styling */
+  .notification {
+    max-width: 400px;
+  }
 }
+

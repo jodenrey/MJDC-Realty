@@ -60,10 +60,11 @@
       integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    />
-    <!-- Stylesheet -->
+    />    <!-- Stylesheet -->
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/custom.css" />
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <title>Contact Us | MJDC Realty - Get in Touch with Us</title>
   </head>
 
@@ -222,11 +223,9 @@
                 alt=""
                 class="rounded-lg object-cover"
               />
-            </div>
-            <div class="contact-form-container w-full md:self-center">
+            </div>            <div class="contact-form-container w-full md:self-center">
               <form
-                action=""
-                method="POST"
+                id="contactForm"
                 class="contact-form flex flex-col gap-6 min-[480px]:gap-7"
               >
                 <div
@@ -293,6 +292,27 @@
                 </div>
               </form>
             </div>
+              <!-- Success notification element -->
+            <div id="success-notification" class="notification">
+              <div class="notification-icon success">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <div class="notification-content">
+                <div class="notification-title">Message Sent!</div>
+                <div class="notification-message">We will reach out to you as soon as possible.</div>
+              </div>
+            </div>
+            
+            <!-- Error notification element -->
+            <div id="error-notification" class="notification">
+              <div class="notification-icon error">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <div class="notification-content">
+                <div class="notification-title">Message Failed</div>
+                <div class="notification-message">There was an error sending your message. Please try again.</div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -330,7 +350,7 @@
               </div>
               <div class="contact-card p-3 bg-white rounded-lg flex flex-col">
                 <p class="font-bold text-stone-950">Send us an email</p>
-                <p class="text-stone-950 mt-3">mjdcrealtyph@gmail.com</p>
+                <p class="text-stone-950 mt-3">realestate@mjdcrealty.com</p>
                 <i class="text-stone-600 fa-solid fa-arrow-right"> </i>
               </div>
             </div>
