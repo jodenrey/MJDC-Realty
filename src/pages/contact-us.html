@@ -155,7 +155,7 @@
                 href="./properties-categories.html"
                 class="nav-link pb-5 block border border-x-0 border-t-0 hover:border-slate-800"
               >
-                properties Categories
+              List of subdivisions
                 <i class="fa-solid fa-arrow-right"></i>
               </a>
             </li>
@@ -225,7 +225,7 @@
             </div>
             <div class="contact-form-container w-full md:self-center">
               <form
-                action="https://formspree.io/f/xldglala"
+                action=""
                 method="POST"
                 class="contact-form flex flex-col gap-6 min-[480px]:gap-7"
               >
@@ -266,6 +266,10 @@
                     id="phone-number"
                     class="border border-slate-950 bg-transparent"
                     placeholder="Phone number"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    maxlength="11"
+                    onkeypress="return /[0-9]/i.test(event.key)"
                   />
                 </div>
                 <textarea
@@ -275,8 +279,7 @@
                   placeholder="Write your message here"
                   maxlength="400"
                   required
-                >
-                </textarea>
+                ></textarea>
                 <div
                   class="flex flex-col gap-6 min-[480px]:flex-row min-[480px]:gap-7"
                   >
@@ -342,7 +345,7 @@
         </div>
         <div
           class="container mt-24 faq-container mx-auto max-w-screen-2xl flex flex-col md:flex-row gap-5 md:justify-between lg:gap-10 md:mt-32"
-        >
+          >
           <div class="faq-header flex flex-col gap-8 justify-between">
             <div>
               <p class="uppercase text-sm text-stone-600 tracking-wide">
@@ -470,9 +473,7 @@
               </div>
               <div class="faq-answer">
                 <p class="text-stone-600">
-                  MJDC Realty is free for users browsing properties. For sellers and
-                  agents, we offer premium listing packages at affordable rates
-                  to maximize visibility and engagement.
+                  MJDC Realty is free for users browsing properties.
                 </p>
               </div>
             </div>
